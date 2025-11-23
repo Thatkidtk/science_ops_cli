@@ -1,0 +1,10 @@
+# Environments and caches
+.venv/
+.pytest_cache/
+__pycache__/
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
