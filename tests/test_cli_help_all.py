@@ -13,3 +13,6 @@ def test_help_all_lists_subcommands():
     assert "bio" in result.stdout
     assert "data" in result.stdout
     assert "em" in result.stdout
+    assert "analysis" in result.stdout
+    assert "labcalc" in result.stdout
+    assert "bioseq" in result.stdout

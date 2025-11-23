@@ -46,6 +46,22 @@ def _extract_numeric_column(rows: List[Dict[str, str]], col: str) -> np.ndarray:
     return np.array(values, dtype=float)
 
 
+def _extract_numeric_pairs(rows: List[Dict[str, str]], xcol: str, ycol: str) -> np.ndarray:
+    pairs: List[Tuple[float, float]] = []
+    for r in rows:
+        x_raw = r.get(xcol, "").strip()
+        y_raw = r.get(ycol, "").strip()
+        if x_raw == "" or y_raw == "":
+            continue
+        try:
+            x_val = float(x_raw)
+            y_val = float(y_raw)
+        except ValueError:
+            continue
+        pairs.append((x_val, y_val))
+    return np.array(pairs, dtype=float)
+
+
 @app.command("summarize")
 def summarize(
     file: Path = typer.Argument(..., exists=True, readable=True, help="Path to CSV/TSV file."),
@@ -141,3 +157,50 @@ def hist(
         bar_len = int((count / max_count) * width) if max_count > 0 else 0
         bar = "*" * bar_len
         console.print(f"{left: .4g} – {right: .4g} | {bar} ({count})")
+
+
+@app.command("plot")
+def plot(
+    file: Path = typer.Argument(..., exists=True, readable=True, help="Path to CSV/TSV file."),
+    xcol: str = typer.Argument(..., help="Column name for x values."),
+    ycol: str = typer.Argument(..., help="Column name for y values."),
+    width: int = typer.Option(60, "--width", help="Plot width (chars)."),
+    height: int = typer.Option(15, "--height", help="Plot height (rows)."),
+    delimiter: str | None = typer.Option(None, "--delimiter", "-d", help="Optional delimiter override."),
+) -> None:
+    """
+    ASCII scatter/line plot of two numeric columns.
+    """
+    headers, rows = _load_table(file, delimiter=delimiter)
+    if xcol not in headers or ycol not in headers:
+        console.print(f"[red]Columns not found. Available: {', '.join(headers)}[/red]")
+        raise typer.Exit(code=1)
+
+    pts = _extract_numeric_pairs(rows, xcol, ycol)
+    if pts.size == 0:
+        console.print("[yellow]No numeric data found for the requested columns.[/yellow]")
+        raise typer.Exit(code=1)
+
+    x_vals = pts[:, 0]
+    y_vals = pts[:, 1]
+    xmin, xmax = float(x_vals.min()), float(x_vals.max())
+    ymin, ymax = float(y_vals.min()), float(y_vals.max())
+    if xmax == xmin:
+        xmax += 1.0
+        xmin -= 1.0
+    if ymax == ymin:
+        ymax += 1.0
+        ymin -= 1.0
+
+    grid = [[" " for _ in range(width)] for _ in range(height)]
+
+    for x, y in pts:
+        xi = int((x - xmin) / (xmax - xmin) * (width - 1))
+        yi = int((y - ymin) / (ymax - ymin) * (height - 1))
+        yi = (height - 1) - yi  # invert y for display
+        grid[yi][xi] = "*"
+
+    console.print(f"[bold]Plot {ycol} vs {xcol}[/bold] ({len(pts)} points)")
+    console.print(f"x in [{xmin:.4g}, {xmax:.4g}], y in [{ymin:.4g}, {ymax:.4g}]")
+    for row in grid:
+        console.print("".join(row))

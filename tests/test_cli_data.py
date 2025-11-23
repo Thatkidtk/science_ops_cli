@@ -37,3 +37,11 @@ def test_data_hist(tmp_path):
     assert result.exit_code == 0
     assert "Histogram for" in result.stdout
     assert "*" in result.stdout
+
+
+def test_data_plot(tmp_path):
+    csv_path = _make_csv(tmp_path)
+    result = runner.invoke(app, ["data", "plot", str(csv_path), "x", "y", "--width", "20", "--height", "8"])
+    assert result.exit_code == 0
+    assert "Plot y vs x" in result.stdout
+    assert "*" in result.stdout

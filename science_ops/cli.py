@@ -18,6 +18,9 @@ from .tools import (
     data,
     optics,
     em,
+    analysis,
+    labcalc,
+    bioseq,
     config_cli,
 )
 
@@ -59,6 +62,9 @@ _register(bio.app, "bio")
 _register(data.app, "data")
 _register(optics.app, "optics")
 _register(em.app, "em")
+_register(analysis.app, "analysis")
+_register(labcalc.app, "labcalc")
+_register(bioseq.app, "bioseq")
 _register(config_cli.app, "config")
 
 

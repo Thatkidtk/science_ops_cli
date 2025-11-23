@@ -13,5 +13,8 @@ from . import (
     data,
     optics,
     em,
+    analysis,
+    labcalc,
+    bioseq,
     config_cli,
 )  # noqa: F401

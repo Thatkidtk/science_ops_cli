@@ -10,6 +10,7 @@ Think of it as a tiny multi-discipline lab that lives in your shell:
 - A lab notebook that logs your commands and results
 - Science modules (astronomy, chemistry, mechanics, optics, electromagnetism, relativity, biology)
 - Quick CSV/TSV exploration and histograms
+- Data analysis (regression), uncertainty, and lab calculators
 
 This is designed to be **extensible**: new scientific domains can be added as `tools/` modules with their own subcommands.
 
@@ -116,6 +117,11 @@ Current presets: Earth, Venus, Moon, Mars, Jupiter, Saturn, Sun.
 - `ops data summarize file.csv` – stats for numeric columns
 - `ops data head file.csv --rows N` – preview rows
 - `ops data hist file.csv col --bins 10` – ASCII histogram
+- `ops data plot file.csv x y` – ASCII scatter/line plot
+
+### 📊 Analysis (`ops analysis ...`)
+- `ops analysis regress file.csv x y` – simple linear regression (slope/intercept/r/r^2)
+- `ops analysis uncertainty u1 u2 ...` – combine independent uncertainties in quadrature
 
 ### 🔦 Optics (`ops optics ...`)
 - `ops optics snell n1 n2 theta1` – refraction / total internal reflection
@@ -124,6 +130,14 @@ Current presets: Earth, Venus, Moon, Mars, Jupiter, Saturn, Sun.
 ### ⚡ Electromagnetism (`ops em ...`)
 - `ops em coulomb q1 q2 r` – Coulomb force magnitude and interaction type
 - `ops em reactance freq --L H --C F` – reactive impedance for inductors/capacitors
+
+### 🧪 Lab calculations (`ops labcalc ...`)
+- `ops labcalc stock-dilution C_stock C_final V_final` – compute stock/solvent volumes
+- `ops labcalc percent-error measured true` – quick percent error
+
+### 🧬 Bio sequence files (`ops bioseq ...`)
+- `ops bioseq gc-file file.fa` – GC content from FASTA/plain text
+- `ops bioseq translate-file file.fa` – translate coding sequence (stop at first stop)
 
 ### ⚙️ Config (`ops config ...`)
 - `ops config show` – view current config (notebook path, default body, color)
@@ -165,8 +179,11 @@ ops units --help
 ops stats --help
 ops waves --help
 ops data --help
+ops analysis --help
 ops optics --help
 ops em --help
+ops labcalc --help
+ops bioseq --help
 ops config --help
 ops help-all
 ops notebook --help
