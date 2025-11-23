@@ -2,7 +2,7 @@
 name = "science-ops-cli"
 version = "0.1.0"
 description = "A terminal Swiss army knife for scientists and mathematicians."
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = [{ name = "Your Name", email = "Thomaskase14@gmail.com" }]
 requires-python = ">=3.10"
 dependencies = [
     "typer[all]>=0.12.0",
