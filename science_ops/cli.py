@@ -4,12 +4,28 @@ import typer
 from rich.console import Console
 
 from . import __version__
-from .tools import constants, units, stats, waves, lab_notebook, astro, chem, mech, relativity, bio
+from .tools import (
+    constants,
+    units,
+    stats,
+    waves,
+    lab_notebook,
+    astro,
+    chem,
+    mech,
+    relativity,
+    bio,
+    data,
+    optics,
+    em,
+    config_cli,
+)
 
 app = typer.Typer(
     help="Science Ops CLI — a terminal Swiss army knife for scientists and mathematicians."
 )
 console = Console()
+_subapps: list[tuple[str, typer.Typer]] = []
 
 
 @app.callback()
@@ -24,17 +40,37 @@ def main(
         raise typer.Exit()
 
 
+def _register(subapp: typer.Typer, name: str) -> None:
+    app.add_typer(subapp, name=name)
+    _subapps.append((name, subapp))
+
+
 # Mount sub-apps
-app.add_typer(constants.app, name="constants")
-app.add_typer(units.app, name="units")
-app.add_typer(stats.app, name="stats")
-app.add_typer(waves.app, name="waves")
-app.add_typer(lab_notebook.app, name="notebook")
-app.add_typer(astro.app, name="astro")
-app.add_typer(chem.app, name="chem")
-app.add_typer(mech.app, name="mech")
-app.add_typer(relativity.app, name="relativity")
-app.add_typer(bio.app, name="bio")
+_register(constants.app, "constants")
+_register(units.app, "units")
+_register(stats.app, "stats")
+_register(waves.app, "waves")
+_register(lab_notebook.app, "notebook")
+_register(astro.app, "astro")
+_register(chem.app, "chem")
+_register(mech.app, "mech")
+_register(relativity.app, "relativity")
+_register(bio.app, "bio")
+_register(data.app, "data")
+_register(optics.app, "optics")
+_register(em.app, "em")
+_register(config_cli.app, "config")
+
+
+@app.command("help-all")
+def help_all() -> None:
+    """
+    Show all subcommands and their short help strings.
+    """
+    console.print("[bold]Science Ops CLI command index[/bold]\n")
+    for name, sub in _subapps:
+        help_text = getattr(getattr(sub, "info", None), "help", "") or ""
+        console.print(f"[cyan]{name}[/cyan]: {help_text}")
 
 
 if __name__ == "__main__":

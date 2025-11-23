@@ -8,13 +8,14 @@ Think of it as a tiny multi-discipline lab that lives in your shell:
 - Basic statistics and probability tools
 - Waveform generation and ASCII plotting
 - A lab notebook that logs your commands and results
-- Early science modules (astronomy, chemistry, mechanics, relativity, biology)
+- Science modules (astronomy, chemistry, mechanics, optics, electromagnetism, relativity, biology)
+- Quick CSV/TSV exploration and histograms
 
 This is designed to be **extensible**: new scientific domains can be added as `tools/` modules with their own subcommands.
 
 ---
 
-## Features (Phase 1)
+## Features
 
 ### ✅ Constants
 Search a curated set of physical constants with proper units and references.
@@ -111,6 +112,26 @@ ops relativity grav-dilation --body jupiter --altitude 100000
 
 Current presets: Earth, Venus, Moon, Mars, Jupiter, Saturn, Sun.
 
+### 📈 Data (`ops data ...`)
+- `ops data summarize file.csv` – stats for numeric columns
+- `ops data head file.csv --rows N` – preview rows
+- `ops data hist file.csv col --bins 10` – ASCII histogram
+
+### 🔦 Optics (`ops optics ...`)
+- `ops optics snell n1 n2 theta1` – refraction / total internal reflection
+- `ops optics thin-lens f d_o` – image distance and magnification
+
+### ⚡ Electromagnetism (`ops em ...`)
+- `ops em coulomb q1 q2 r` – Coulomb force magnitude and interaction type
+- `ops em reactance freq --L H --C F` – reactive impedance for inductors/capacitors
+
+### ⚙️ Config (`ops config ...`)
+- `ops config show` – view current config (notebook path, default body, color)
+- `ops config set KEY VALUE` – change config values
+
+### 🧭 Command index
+- `ops help-all` – list all subcommands with their short descriptions
+
 ---
 
 ## Installation
@@ -143,6 +164,11 @@ ops constants --help
 ops units --help
 ops stats --help
 ops waves --help
+ops data --help
+ops optics --help
+ops em --help
+ops config --help
+ops help-all
 ops notebook --help
 ops astro --help
 ops chem --help
