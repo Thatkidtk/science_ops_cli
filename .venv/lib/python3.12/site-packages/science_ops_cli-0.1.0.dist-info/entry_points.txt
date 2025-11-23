@@ -1,0 +1,2 @@
+[console_scripts]
+ops = science_ops.cli:app
