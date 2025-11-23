@@ -1,0 +1,18 @@
+[project]
+name = "science-ops-cli"
+version = "0.1.0"
+description = "A terminal Swiss army knife for scientists and mathematicians."
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10"
+dependencies = [
+    "typer[all]>=0.12.0",
+    "rich>=13.0.0",
+    "numpy>=1.26.0"
+]
+
+[project.scripts]
+ops = "science_ops.cli:app"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
