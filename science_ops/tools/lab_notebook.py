@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import typer
 from rich.console import Console
 
@@ -41,6 +43,6 @@ def set_path(
 ) -> None:
     """Change the notebook file path."""
     cfg = load_config()
-    cfg.notebook_path = typer.Path(path)  # type: ignore[arg-type]
+    cfg.notebook_path = Path(path)
     save_config(cfg)
     console.print(f"Notebook path set to [green]{cfg.notebook_path}[/green]")

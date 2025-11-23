@@ -1,9 +1,22 @@
 [project]
 name = "science-ops-cli"
-version = "0.1.0"
-description = "A terminal Swiss army knife for scientists and mathematicians."
-authors = [{ name = "Your Name", email = "Thomaskase14@gmail.com" }]
+version = "0.2.0"
+description = "A multi-discipline scientific CLI toolkit for physics, astronomy, biology, chemistry, and data analysis."
+authors = [{ name = "Thomas Black", email = "your.email@example.com" }]
+license = { file = "LICENSE" }
+readme = "README.md"
 requires-python = ">=3.10"
+keywords = ["science", "physics", "biology", "relativity", "cli", "astronomy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Utilities",
+]
 dependencies = [
     "typer[all]>=0.12.0",
     "rich>=13.0.0",
@@ -12,6 +25,11 @@ dependencies = [
 
 [project.scripts]
 ops = "science_ops.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/thatkidtk/science-ops-cli"
+Repository = "https://github.com/thatkidtk/science-ops-cli"
+Documentation = "https://github.com/thatkidtk/science-ops-cli/wiki"
 
 [build-system]
 requires = ["setuptools>=61.0"]
