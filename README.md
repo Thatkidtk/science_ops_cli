@@ -115,15 +115,21 @@ Current presets: Earth, Venus, Moon, Mars, Jupiter, Saturn, Sun.
 
 ## Installation
 
-Using pip (editable dev install)
+From PyPI (recommended):
 
 ```bash
-git clone https://github.com/yourname/science-ops-cli.git
+pip install -U science-ops-cli
+```
+
+Dev install from source:
+
+```bash
+git clone https://github.com/thatkidtk/science-ops-cli.git
 cd science-ops-cli
 pip install -e .
 ```
 
-This will install a console script called `ops` (defined in `pyproject.toml`).
+Either way you get a console script called `ops`.
 
 ---
 
@@ -179,12 +185,7 @@ Each module under `tools/` exposes a `typer.Typer()` app that gets mounted under
 
 ## Roadmap
 
-See `ROADMAP.md` (or the main issue tracker) for upcoming modules:
-- Astronomy (astro)
-- Chemistry (chem)
-- Genetics & evolution (bio)
-- Mechanics & orbits (mech)
-- Relativity (relativity)
+See `ROADMAP.md` for what’s next (Phase 2/3) or open issues for ideas and bugs.
 
 ---
 
@@ -200,4 +201,3 @@ See `ROADMAP.md` (or the main issue tracker) for upcoming modules:
 ## License
 
 MIT, because science should spread.
-# science_ops_cli

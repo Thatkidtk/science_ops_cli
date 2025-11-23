@@ -1,3 +1,4 @@
+LICENSE
 README.md
 pyproject.toml
 science_ops/__init__.py
@@ -32,8 +33,12 @@ tests/test_cli_astro.py
 tests/test_cli_bio.py
 tests/test_cli_chem.py
 tests/test_cli_mech.py
+tests/test_cli_notebook.py
 tests/test_cli_relativity.py
+tests/test_cli_stats.py
 tests/test_cli_units.py
+tests/test_cli_waves.py
+tests/test_config.py
 tests/test_constants.py
 tests/test_mech.py
 tests/test_relativity.py
