@@ -2,7 +2,7 @@
 name = "science-ops-cli"
 version = "0.2.0"
 description = "A multi-discipline scientific CLI toolkit for physics, astronomy, biology, chemistry, and data analysis."
-authors = [{ name = "Thomas Black", email = "your.email@example.com" }]
+authors = [{ name = "Thomas Black", email = "thomaskase14@gmail.com" }]
 license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.10"
